@@ -1,0 +1,7 @@
+package com.premit.employee_registry.service;
+
+import com.premit.employee_registry.dto.EmployeeDTO;
+
+public interface EmployeeService{
+    public abstract String employeeRegistration(EmployeeDTO employeeDTO);
+}

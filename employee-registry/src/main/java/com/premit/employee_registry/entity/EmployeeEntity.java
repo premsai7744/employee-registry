@@ -42,9 +42,9 @@ public class EmployeeEntity {
 
     @JoinColumn(name="emp_id")
     @OneToMany(cascade = {CascadeType.PERSIST,CascadeType.MERGE})
-    private List<EducationDTO> education;
+    private List<EducationEntity> education;
 
     @JoinColumn(name="emp_id")
     @OneToMany(cascade = {CascadeType.PERSIST,CascadeType.MERGE})
-    private List<CompanyDTO> employement;
+    private List<CompanyEntity> employement;
 }

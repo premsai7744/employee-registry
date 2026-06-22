@@ -12,7 +12,7 @@ public class EducationEntity {
                        sequenceName = "education_seq",
                        allocationSize = 1)
 
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "education_id_gen")
     @Id
     @Column(name="education_id_gen")
     private int educationId;
