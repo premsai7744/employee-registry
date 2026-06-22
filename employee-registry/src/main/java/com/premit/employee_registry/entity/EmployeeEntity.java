@@ -33,8 +33,9 @@ public class EmployeeEntity {
     @Column(name="contact")
     private long contact;
 
-    @Column(name="languages")
-    private List<String> languages;
+    @JoinColumn(name="emp_id")
+    @OneToMany(cascade = {CascadeType.PERSIST,CascadeType.MERGE})
+    private List<LanguageEntity> listOfLanguageEntities;
 
     @JoinColumn(name="addr_id")
     @OneToOne(cascade = {CascadeType.PERSIST,CascadeType.MERGE})

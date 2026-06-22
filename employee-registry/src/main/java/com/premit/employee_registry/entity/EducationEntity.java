@@ -14,7 +14,7 @@ public class EducationEntity {
 
     @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "education_id_gen")
     @Id
-    @Column(name="education_id_gen")
+    @Column(name="edu_id")
     private int educationId;
 
     @Column(name="standard")

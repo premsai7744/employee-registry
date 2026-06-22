@@ -1,10 +1,7 @@
 package com.premit.employee_registry.service;
 
 import com.premit.employee_registry.dto.EmployeeDTO;
-import com.premit.employee_registry.entity.AddressEntity;
-import com.premit.employee_registry.entity.CompanyEntity;
-import com.premit.employee_registry.entity.EducationEntity;
-import com.premit.employee_registry.entity.EmployeeEntity;
+import com.premit.employee_registry.entity.*;
 import com.premit.employee_registry.repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -55,7 +52,16 @@ public class EmployeeServiceImplClass implements EmployeeService{
         employeeEntity.setEmail(employeeDTO.getEmail());
         employeeEntity.setContact(employeeDTO.getContact());
         employeeEntity.setEname(employeeDTO.getEname());
-        employeeEntity.setLanguages(employeeDTO.getLanguages());
+
+        List<LanguageEntity> languageEntities = new ArrayList<>();
+
+        employeeDTO.getLanguages().forEach(lang->{
+            LanguageEntity languageEntity = new LanguageEntity();
+            languageEntity.setLanguage(lang);
+            languageEntities.add(languageEntity);
+        });
+
+        employeeEntity.setListOfLanguageEntities(languageEntities);
         employeeEntity.setPassword(employeeDTO.getPassword());
         employeeEntity.setEmployement(companyEntityList);
 
