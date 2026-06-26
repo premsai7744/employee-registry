@@ -1,5 +1,6 @@
 package com.premit.employee_registry.service;
 
+import com.premit.employee_registry.dto.ChangePasswordDTO;
 import com.premit.employee_registry.dto.EmployeeDTO;
 import com.premit.employee_registry.entity.*;
 import com.premit.employee_registry.repository.EmployeeRepository;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class EmployeeServiceImplClass implements EmployeeService{
@@ -77,5 +79,34 @@ public class EmployeeServiceImplClass implements EmployeeService{
                 return "Employee registration failed.";
             }
         }
+    }
+
+    @Override
+    public int changePassword(ChangePasswordDTO changePasswordDTO, String email) {
+       String oldPassword = changePasswordDTO.getOldPassword();
+       String newPassword = changePasswordDTO.getNewPassword();
+       String retypedPassword = changePasswordDTO.getRetypedPassword();
+       Optional<EmployeeEntity> optionalEmployeeEntity = employeeRepository.findByEmail(email);
+       if(optionalEmployeeEntity.isPresent()){
+          EmployeeEntity employeeEntity = optionalEmployeeEntity.get();
+          String retrievedOldPassword = employeeEntity.getPassword();
+          if(oldPassword.equals(retrievedOldPassword)) {
+              if(newPassword.equals(retypedPassword)){
+                  employeeEntity.setPassword(newPassword);
+                  EmployeeEntity savedEmployee = employeeRepository.save(employeeEntity);
+                  if(savedEmployee!=null){
+                      return 1;
+                  } else {
+                      return 0;
+                  }
+              } else {
+                  return 4;
+              }
+          } else {
+              return 3;
+          }
+       } else {
+           return 2;
+       }
     }
 }
