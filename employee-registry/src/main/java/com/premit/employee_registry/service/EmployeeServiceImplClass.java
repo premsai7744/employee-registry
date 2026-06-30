@@ -74,7 +74,7 @@ public class EmployeeServiceImplClass implements EmployeeService{
         } else {
            EmployeeEntity savedEntity = employeeRepository.save(employeeEntity);
             if(savedEntity!=null){
-                return "Employee registered successfully."+" Welcome employee : "+savedEntity.getEname();
+                return "Employee registered successfully, Please login with your credentials.";
             } else {
                 return "Employee registration failed.";
             }
